@@ -1,0 +1,33 @@
+---
+- name: Node
+  hosts: all
+  tasks:
+    - name: ensure python-software-properties
+      apt: name=python-software-properties state=present
+      sudo: true
+    - name: add Chris Lea's node.js repo
+      apt_repository: repo='ppa:chris-lea/node.js' state=present update-cache=yes
+      sudo: true
+    - name: ensure node.js
+      apt: name=nodejs state=latest
+      sudo: true
+    - name: ensure n
+      npm: name=n global=yes state=present
+      sudo: true
+    - name: set custom node.js version if necessary
+      when: node_version is defined
+      command: n {{ node_version }}
+      sudo: true
+
+- name: Gulp
+  hosts: all
+  tasks:
+    - name: ensure gulp
+      npm: name=gulp global=yes state=present
+
+- name: Mongo
+  hosts: all
+  tasks:
+    - name: ensure mongo
+      apt: pkg=mongodb state=latest
+      sudo: true
