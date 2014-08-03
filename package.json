@@ -1,6 +1,6 @@
 {
   "name": "boilerplate",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Modern web application boilerplate",
   "main": "main.js",
