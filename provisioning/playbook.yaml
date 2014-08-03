@@ -31,3 +31,9 @@
     - name: ensure mongo
       apt: pkg=mongodb state=latest
       sudo: true
+
+- name: NPM node_modules mountpoint
+  hosts: all
+  tasks:
+    - name: mount folder
+      mount: name=/vagrant/node_modules src=/tmp/node_modules opts=bind fstype=none state=mounted
