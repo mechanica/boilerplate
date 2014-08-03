@@ -35,5 +35,7 @@
 - name: NPM node_modules mountpoint
   hosts: all
   tasks:
+    - name: create local folder
+      file: dest=/tmp/node_modules mode=777 owner=vagrant group=vagrant state=directory
     - name: mount folder
       mount: name=/vagrant/node_modules src=/tmp/node_modules opts=bind fstype=none state=mounted
