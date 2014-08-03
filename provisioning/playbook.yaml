@@ -18,6 +18,16 @@
       when: node_version is defined
       command: n {{ node_version }}
       sudo: true
+    - name: ensure npm show http logs
+      command: npm config get loglevel
+      register: _npm_loglevel
+      changed_when: _npm_loglevel.stdout != 'http'
+      notify:
+        - set npm loglevel to http
+  handlers:
+    - name: set npm loglevel to http
+      command: npm config set loglevel=http --global
+      sudo: true
 
 - name: Gulp
   hosts: all
