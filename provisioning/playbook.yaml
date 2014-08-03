@@ -49,3 +49,16 @@
       file: dest=/tmp/node_modules mode=777 owner=vagrant group=vagrant state=directory
     - name: mount folder
       mount: name=/vagrant/node_modules src=/tmp/node_modules opts=bind fstype=none state=mounted
+
+- name: Native modules prerequisites
+  hosts: all
+  tasks:
+    - name: ensure build essentials
+      apt: name=build-essential state=present
+      sudo: true
+    - name: ensure libjpeg-turbo8
+      apt: name=libjpeg-turbo8 state=present
+      sudo: true
+    - name: ensure libjpeg-turbo8-dev
+      apt: name=libjpeg-turbo8-dev state=present
+      sudo: true
